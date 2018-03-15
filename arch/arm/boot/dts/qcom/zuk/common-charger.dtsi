@@ -2,7 +2,7 @@
 	qcom,battery-data = <&mtp_batterydata>;	
 	qcom,fastchg-current-ma = <2478>;
 	qcom,float-voltage-mv = <4400>;
-	qcom,thermal-mitigation = <2000 1500 700>;
+	qcom,thermal-mitigation = <2400 2000 1800>;
 	qcom,warm-cc-comp = <1300>;
 	qcom,warm-fv-comp = <4100>;
 	qcom,cool-cc-comp = <500>;
@@ -10,7 +10,7 @@
 	qcom,usbin-vadc = <&pmi8994_vadc>;
 	qcom,bmd-algo-disabled;
 	qcom,float-voltage-comp = <0x10>;
-	qcom,fastchg-current-comp = <1500>;
+	qcom,fastchg-current-comp = <2478>;
 };
 
 &pmi8994_fg {
