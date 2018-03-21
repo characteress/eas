@@ -43,6 +43,7 @@
 #define TEMP_MAX_POINT 95
 #define CPU_HOTPLUG_LIMIT 80
 #define CPU_BIT_MASK(cpu) BIT(cpu)
+#define DEFAULT_TEMP 40
 #define DEFAULT_LOW_HYST_TEMP 10
 #define DEFAULT_HIGH_HYST_TEMP 5
 #define CLUSTER_OFFSET_FOR_MPIDR 8
@@ -232,7 +233,6 @@ static void repopulate_stats(int cpu)
 
 void trigger_cpu_pwr_stats_calc(void)
 {
-#ifdef ENABLE_TSENS_SAMPLING
 	int cpu;
 	static long prev_temp[NR_CPUS];
 	struct cpu_activity_info *cpu_node;
@@ -264,7 +264,6 @@ void trigger_cpu_pwr_stats_calc(void)
 			repopulate_stats(cpu);
 	}
 	spin_unlock(&update_lock);
-#endif
 }
 EXPORT_SYMBOL(trigger_cpu_pwr_stats_calc);
 
@@ -310,7 +309,6 @@ static void update_related_freq_table(struct cpufreq_policy *policy)
 	}
 }
 
-#ifdef ENABLE_TSENS_SAMPLING
 static __ref int do_sampling(void *data)
 {
 	int cpu;
@@ -350,7 +348,6 @@ unlock:
 	}
 	return 0;
 }
-#endif
 
 static void clear_static_power(struct cpu_static_info *sp)
 {
@@ -1104,7 +1101,6 @@ static int msm_core_dev_probe(struct platform_device *pdev)
 	if (ret)
 		goto failed;
 
-#ifdef ENABLE_TSENS_SAMPLING
 	INIT_DEFERRABLE_WORK(&sampling_work, samplequeue_handle);
 	ret = msm_core_task_init(&pdev->dev);
 	if (ret)
@@ -1116,7 +1112,6 @@ static int msm_core_dev_probe(struct platform_device *pdev)
 	INIT_DEFERRABLE_WORK(&sampling_work, samplequeue_handle);
 	schedule_delayed_work(&sampling_work, msecs_to_jiffies(0));
 	pm_notifier(system_suspend_handler, 0);
-#endif
 	cpufreq_register_notifier(&cpu_policy, CPUFREQ_POLICY_NOTIFIER);
 	return 0;
 failed:
