@@ -1414,7 +1414,7 @@ __setup_irq(unsigned int irq, struct irq_desc *desc, struct irqaction *new)
 			irq_set_affinity_locked(&desc->irq_data,
 				cpu_perf_mask, true);
 		} else {
-			setup_affinity(desc, mask);
+			setup_affinity(irq, desc, mask);
 		}
 
 	} else if (new->flags & IRQF_TRIGGER_MASK) {
