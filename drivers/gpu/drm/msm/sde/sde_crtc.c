@@ -1008,6 +1008,7 @@ void sde_crtc_cancel_pending_flip(struct drm_crtc *crtc, struct drm_file *file)
  * @crtc: Pointer to drm crtc structure
  */
 static void sde_crtc_install_properties(struct drm_crtc *crtc)
+
 {
 	struct sde_crtc *sde_crtc;
 	struct drm_device *dev;
