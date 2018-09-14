@@ -33,7 +33,7 @@ struct sugov_tunables {
 	struct gov_attr_set attr_set;
 	unsigned int up_rate_limit_us;
 	unsigned int down_rate_limit_us;
-	bool iowait_boost_enable = 1;
+	bool iowait_boost_enable;
 };
 
 struct sugov_policy {
