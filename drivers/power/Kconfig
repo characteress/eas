@@ -519,7 +519,7 @@ config QPNP_SMB2
 
 config FUELGAUGE_STC3117
 	tristate "STC3117 fuel gauge driver"
-	default y
+	default n
 	depends on I2C
 	help
 	  Say Y to include support
