@@ -660,8 +660,10 @@ KBUILD_CFLAGS   += -pipe -mno-fix-cortex-a53-843419 -mno-fix-cortex-a53-835769 -
 KBUILD_CFLAGS += -fgraphite -fgraphite-identity -floop-parallelize-all
 # -ftree-loop-distribute-patterns -ftree-loop-distribution -ftree-vectorize
 
-# Kill format truncation warnings
-KBUILD_CFLAGS   += $(call cc-disable-warning,format-truncation,)
+KBUILD_CFLAGS += -march=armv8-a+simd+crypto+crc -mtune=cortex-a57.cortex-a53 -fmerge-all-constants -fmodulo-sched -fmodulo-sched-allow-regmoves -floop-interchange
+# -finline-functions -> no significant performance jump, significantly increased size
+# -fpredictive-commoning -> slowing down intercore scores
+# -ffast-math -ftree-vectorize -ftree-slp-vectorize
 
 ifeq ($(cc-name),clang)
 KBUILD_CFLAGS	+= -O3
