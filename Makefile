@@ -652,8 +652,13 @@ KBUILD_CFLAGS	+= $(call cc-disable-warning, int-in-bool-context)
 KBUILD_CFLAGS	+= $(call cc-option,-fno-PIE)
 KBUILD_AFLAGS	+= $(call cc-option,-fno-PIE)
 
-# Needed to unbreak GCC 7.x and above
-KBUILD_CFLAGS   += $(call cc-option,-fno-store-merging,)
+# not all drivers like store merging in newer GCCs
+# -pipe makes compilation faster
+# msm8996 is not affected so disable errata fixes
+KBUILD_CFLAGS   += -pipe -mno-fix-cortex-a53-843419 -mno-fix-cortex-a53-835769 -Wno-attribute-alias
+
+KBUILD_CFLAGS += -fgraphite -fgraphite-identity -floop-parallelize-all
+# -ftree-loop-distribute-patterns -ftree-loop-distribution -ftree-vectorize
 
 # Kill format truncation warnings
 KBUILD_CFLAGS   += $(call cc-disable-warning,format-truncation,)
