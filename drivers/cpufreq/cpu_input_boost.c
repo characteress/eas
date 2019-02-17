@@ -29,10 +29,14 @@ static bool stune_boost_active;
 static int boost_slot;
 static unsigned short dynamic_stune_boost;
 module_param(dynamic_stune_boost, short, 0644);
+unsigned long last_input_jiffies;
+
+static __read_mostly unsigned int frame_boost_timeout = CONFIG_FRAME_BOOST_TIMEOUT;
 
 module_param(input_boost_freq_lp, uint, 0644);
 module_param(input_boost_freq_hp, uint, 0644);
 module_param(input_boost_duration, short, 0644);
+module_param(frame_boost_timeout, uint, 0644);
 
 /* Available bits for boost_drv state */
 #define SCREEN_AWAKE		(1U << 0)
