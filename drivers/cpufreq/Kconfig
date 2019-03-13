@@ -198,11 +198,11 @@ config CPU_FREQ_DEFAULT_GOV_ENERGY
 	bool "energy-dcfc"
 	depends on SMP
 	select CPU_FREQ_GOV_ENERGY
-	select CPU_FREQ_GOV_PERFORMANCE
+	select CPU_FREQ_GOV_SCHEDUTIL
 	help
 	  Use the 'energy-dcfc' CPUFreq governor by default. If unsure,
 	  have a look at the help section of that governor. The fallback
-	  governor will be 'performance'.
+	  governor will be 'schedutil'.
 
 endchoice
 
