@@ -23,7 +23,6 @@
 #include <asm/cpudata.h>
 #include <asm/uaccess.h>
 #include <linux/atomic.h>
-#include <linux/sched_clock.h>
 #include <asm/nmi.h>
 #include <asm/pcr.h>
 #include <asm/cacheflush.h>
@@ -1587,8 +1586,6 @@ static int __kprobes perf_event_nmi_handler(struct notifier_block *self,
 	struct perf_sample_data data;
 	struct cpu_hw_events *cpuc;
 	struct pt_regs *regs;
-	u64 finish_clock;
-	u64 start_clock;
 	int i;
 
 	if (!atomic_read(&active_events))
@@ -1601,8 +1598,6 @@ static int __kprobes perf_event_nmi_handler(struct notifier_block *self,
 	default:
 		return NOTIFY_DONE;
 	}
-
-	start_clock = sched_clock();
 
 	regs = args->regs;
 
@@ -1641,10 +1636,6 @@ static int __kprobes perf_event_nmi_handler(struct notifier_block *self,
 		if (perf_event_overflow(event, &data, regs))
 			sparc_pmu_stop(event, 0);
 	}
-
-	finish_clock = sched_clock();
-
-	perf_sample_event_took(finish_clock - start_clock);
 
 	return NOTIFY_STOP;
 }
