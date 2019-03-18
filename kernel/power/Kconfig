@@ -20,7 +20,7 @@ config SUSPEND_FREEZER
 
 config WAKELOCK
 	bool "Android's method of preventing suspend"
-	default y
+	default n
 	---help---
 	  This allows applications to prevent the CPU from suspending while
 	  they need it.
@@ -128,7 +128,7 @@ config PM_SLEEP_SMP
 config PM_AUTOSLEEP
 	bool "Opportunistic sleep"
 	depends on PM_SLEEP
-	default n
+	default y
 	---help---
 	Allow the kernel to trigger a system transition into a global sleep
 	state automatically whenever there are no active wakeup sources.
@@ -144,7 +144,7 @@ config PM_WAKELOCKS
 config PM_WAKELOCKS_LIMIT
 	int "Maximum number of user space wakeup sources (0 = no limit)"
 	range 0 100000
-	default 100
+	default 10
 	depends on PM_WAKELOCKS
 
 config PM_WAKELOCKS_GC
@@ -155,6 +155,7 @@ config PM_WAKELOCKS_GC
 config PM_RUNTIME
 	bool "Run-time PM core functionality"
 	depends on !IA64_HP_SIM
+	default y
 	---help---
 	  Enable functionality allowing I/O devices to be put into energy-saving
 	  (low power) states at run time (or autosuspended) after a specified
@@ -214,7 +215,7 @@ config DPM_WATCHDOG
 config DPM_WATCHDOG_TIMEOUT
 	int "Watchdog timeout in seconds"
 	range 1 120
-	default 60
+	default 20
 	depends on DPM_WATCHDOG
 
 config PM_TRACE
@@ -300,7 +301,7 @@ config PM_GENERIC_DOMAINS
 config WQ_POWER_EFFICIENT_DEFAULT
 	bool "Enable workqueue power-efficient mode by default"
 	depends on PM
-	default n
+	default y
 	help
 	  Per-cpu workqueues are generally preferred because they show
 	  better performance thanks to cache locality; unfortunately,
@@ -342,9 +343,9 @@ config SUSPEND_TIME
 
 config DEDUCE_WAKEUP_REASONS
 	bool "Deduce wakeup reasons"
-	default n
+	default y
 
 config	BOEFFLA_WL_BLOCKER
 		bool "Boeffla generic wakelock blocker driver"
 		depends on PM
-		default N
+		default y
