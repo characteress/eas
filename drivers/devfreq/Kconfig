@@ -198,7 +198,7 @@ config ARM_EXYNOS5_BUS_DEVFREQ
 config DEVFREQ_SIMPLE_DEV
 	tristate "Device driver for simple clock device with no status info"
 	select DEVFREQ_GOV_PERFORMANCE
-	select DEVFREQ_GOV_POWERSAVE
+	select DEVFREQ_GOV_SCHEDUTIL
 	select DEVFREQ_GOV_CPUFREQ
 	help
 	  Device driver for simple devices that control their frequency using
@@ -208,7 +208,7 @@ config MSM_DEVFREQ_DEVBW
 	bool "MSM DEVFREQ device for device master <-> slave IB/AB BW voting"
 	depends on ARCH_MSM
 	select DEVFREQ_GOV_PERFORMANCE
-	select DEVFREQ_GOV_POWERSAVE
+	select DEVFREQ_GOV_SCHEDUTIL
 	select DEVFREQ_GOV_CPUFREQ
 	default n
 	help
