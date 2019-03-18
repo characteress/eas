@@ -378,7 +378,7 @@ static const int msm8996_v3_hmss_fuse_ref_volt[MSM8996_HMSS_FUSE_CORNERS] = {
 	645000, /* Place holder entry for LowSVS */
 	645000,
 	805000,
-	1000000,
+	1100000,
 };
 
 /*
