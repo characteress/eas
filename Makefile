@@ -658,9 +658,6 @@ KBUILD_CFLAGS   += $(call cc-option,-fno-store-merging,)
 # Kill format truncation warnings
 KBUILD_CFLAGS   += $(call cc-disable-warning,format-truncation,)
 
-ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
-KBUILD_CFLAGS	+= $(call cc-option,-Oz,-Os) $(call cc-disable-warning,maybe-uninitialized,)
-else
 ifeq ($(cc-name),clang)
 KBUILD_CFLAGS	+= -O3
 else
