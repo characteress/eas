@@ -298,7 +298,6 @@ static void cpu_idle_loop(void)
 		sched_ttwu_pending();
 		schedule_preempt_disabled();
 	}
-}
 
 void cpu_startup_entry(enum cpuhp_state state)
 {
