@@ -3,9 +3,9 @@
 #
 
 ifdef CONFIG_CC_OPTIMIZE_PARTIAL
-EXTRA_CFLAGS += -O3 -fast
+EXTRA_CFLAGS += -O3 -Ofast
 endif
-EXTRA_CFLAGS += -O3 -fast
+EXTRA_CFLAGS += -O3 -Ofast
 
 tuner-objs	:=	tuner-core.o
 
