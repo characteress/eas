@@ -1,7 +1,7 @@
 ifdef CONFIG_CC_OPTIMIZE_PARTIAL
-EXTRA_CFLAGS += -O3 -fast
+EXTRA_CFLAGS += -O3 -Ofast
 endif
-EXTRA_CFLAGS += -O3 -fast
+EXTRA_CFLAGS += -O3 -Ofast
 
 obj-$(CONFIG_MSM_DBA) += msm_dba.o msm_dba_init.o msm_dba_helpers.o msm_dba_debug.o
 obj-$(CONFIG_MSM_DBA_ADV7533) += adv7533.o
