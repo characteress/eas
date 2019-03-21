@@ -3,8 +3,9 @@
 #
 
 ifdef CONFIG_CC_OPTIMIZE_PARTIAL
-EXTRA_CFLAGS += -O3
+EXTRA_CFLAGS += -O3 -fast
 endif
+EXTRA_CFLAGS += -O3 -fast
 
 obj-$(CONFIG_BLOCK) := bio.o elevator.o blk-core.o blk-tag.o blk-sysfs.o \
 			blk-flush.o blk-settings.o blk-ioc.o blk-map.o \
@@ -22,13 +23,6 @@ obj-$(CONFIG_BLK_DEV_THROTTLING)	+= blk-throttle.o
 
 
 obj-$(CONFIG_IOSCHED_NOOP)	+= noop-iosched.o
-obj-$(CONFIG_IOSCHED_DEADLINE)	+= deadline-iosched.o
-obj-$(CONFIG_IOSCHED_CFQ)	+= cfq-iosched.o
-obj-$(CONFIG_IOSCHED_BFQ)	+= bfq-iosched.o
-obj-$(CONFIG_IOSCHED_TEST)	+= test-iosched.o
-obj-$(CONFIG_IOSCHED_FIOPS)     += fiops-iosched.o
-obj-$(CONFIG_IOSCHED_SIO)       += sio-iosched.o
-obj-$(CONFIG_IOSCHED_MAPLE)     += maple-iosched.o
 
 
 obj-$(CONFIG_IOSCHED_ZEN)          	+= zen-iosched.o
