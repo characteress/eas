@@ -23,7 +23,7 @@ obj-$(CONFIG_BLK_DEV_THROTTLING)	+= blk-throttle.o
 
 
 obj-$(CONFIG_IOSCHED_NOOP)	+= noop-iosched.o
-
+obj-$(CONFIG_IOSCHED_BFQ)	+= bfq-iosched.o
 
 obj-$(CONFIG_IOSCHED_ZEN)          	+= zen-iosched.o
 
