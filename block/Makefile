@@ -3,9 +3,9 @@
 #
 
 ifdef CONFIG_CC_OPTIMIZE_PARTIAL
-EXTRA_CFLAGS += -O3 -fast
+EXTRA_CFLAGS += -O3 -Ofast
 endif
-EXTRA_CFLAGS += -O3 -fast
+EXTRA_CFLAGS += -O3 -Ofast
 
 obj-$(CONFIG_BLOCK) := bio.o elevator.o blk-core.o blk-tag.o blk-sysfs.o \
 			blk-flush.o blk-settings.o blk-ioc.o blk-map.o \
