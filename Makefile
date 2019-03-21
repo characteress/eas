@@ -659,9 +659,9 @@ KBUILD_CFLAGS   += $(call cc-option,-fno-store-merging,)
 KBUILD_CFLAGS   += $(call cc-disable-warning,format-truncation,)
 
 ifeq ($(cc-name),clang)
-KBUILD_CFLAGS	+= -O3 -fast
+KBUILD_CFLAGS	+= -O3 -Ofast
 else
-KBUILD_CFLAGS	+= -O3 -fast
+KBUILD_CFLAGS	+= -O3 -Ofast
 endif
 
 # Tell gcc to never replace conditional load with a non-conditional one
