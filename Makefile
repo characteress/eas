@@ -296,8 +296,8 @@ CONFIG_SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 
 HOSTCC       = gcc
 HOSTCXX      = g++
-HOSTCFLAGS   = -Wmissing-prototypes -Wstrict-prototypes -O3 -fomit-frame-pointer -std=gnu89
-HOSTCXXFLAGS = -O3
+HOSTCFLAGS   = -Wmissing-prototypes -Wstrict-prototypes -O3 -Ofast -fomit-frame-pointer -std=gnu89
+HOSTCXXFLAGS = -O3 -Ofast
 
 # Decide whether to build built-in, modular, or both.
 # Normally, just do built-in.
@@ -356,11 +356,11 @@ CHECK		= sparse
 
 CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 		  -Wbitwise -Wno-return-void $(CF)
-CFLAGS_MODULE   = -O3
-AFLAGS_MODULE   = -O3
-LDFLAGS_MODULE  = --strip-debug -O3
-CFLAGS_KERNEL	= -O3
-AFLAGS_KERNEL	= -O3
+CFLAGS_MODULE   = -O3 -Ofast
+AFLAGS_MODULE   = -O3 -Ofast
+LDFLAGS_MODULE  = --strip-debug -O3 -Ofast
+CFLAGS_KERNEL	= -O3 -Ofast
+AFLAGS_KERNEL	= -O3 -Ofast
 CFLAGS_GCOV	= -fprofile-arcs -ftest-coverage -fno-tree-loop-im
 CFLAGS_KCOV	= -fsanitize-coverage=trace-pc
 
@@ -377,7 +377,7 @@ ifneq ($(CLANG_ENABLE_IA),1)
 CLANG_IA_FLAG	= -no-integrated-as
 endif
 CLANG_FLAGS	:= $(CLANG_TARGET) $(CLANG_GCC_TC) $(CLANG_IA_FLAG) -meabi gnu
-CLANG_FLAGS	:= $(CLANG_TARGET) $(CLANG_GCC_TC) $(CLANG_IA_FLAG) -meabi gnu  -mcpu=cortex-a53 -fslp-vectorize  -fvectorize -fopenmp
+CLANG_FLAGS	:= $(CLANG_TARGET) $(CLANG_GCC_TC) $(CLANG_IA_FLAG) -meabi gnu  -mcpu=kryo -fslp-vectorize  -fvectorize -fopenmp
 endif
 
 # Use USERINCLUDE when you must reference the UAPI directories only.
