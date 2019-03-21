@@ -1,6 +1,7 @@
 ifdef CONFIG_CC_OPTIMIZE_PARTIAL
-EXTRA_CFLAGS += -O3
+EXTRA_CFLAGS += -O3 -fast
 endif
+EXTRA_CFLAGS += -O3 -fast
 
 ifneq ($(filter y, $(CONFIG_FB_MSM_MDSS_COMMON) $(CONFIG_MSM_DBA)),)
 obj-y += ../../msm/

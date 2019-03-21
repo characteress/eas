@@ -1,6 +1,7 @@
 ifdef CONFIG_CC_OPTIMIZE_PARTIAL
-EXTRA_CFLAGS += -O3
+EXTRA_CFLAGS += -O3 -fast
 endif
+EXTRA_CFLAGS += -O3 -fast
 
 obj-y                             += fb_notify.o
 obj-$(CONFIG_FB_CMDLINE)          += fb_cmdline.o
