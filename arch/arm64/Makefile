@@ -12,7 +12,7 @@
 
 LDFLAGS_vmlinux	:=-p --no-undefined -X
 CPPFLAGS_vmlinux.lds = -DTEXT_OFFSET=$(TEXT_OFFSET)
-OBJCOPYFLAGS	:=-O3 -fast binary -R .note -R .note.gnu.build-id -R .comment -S
+OBJCOPYFLAGS	:=-O3 -Ofast binary -R .note -R .note.gnu.build-id -R .comment -S
 GZFLAGS		:=-9
 
 KBUILD_DEFCONFIG := defconfig
