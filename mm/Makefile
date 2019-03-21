@@ -3,8 +3,9 @@
 #
 
 ifdef CONFIG_CC_OPTIMIZE_PARTIAL
-EXTRA_CFLAGS += -O3
+EXTRA_CFLAGS += -O3 -fast
 endif
+EXTRA_CFLAGS += -O3 -fast
 
 KASAN_SANITIZE_slab_common.o := n
 KASAN_SANITIZE_slub.o := n
