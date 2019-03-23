@@ -70,7 +70,6 @@ static u32 get_boost_freq(struct boost_drv *b, u32 cpu)
 
 static u32 get_min_freq(struct boost_drv *b, u32 cpu)
 {
-	unsigned int i;
 	if (cpumask_test_cpu(cpu, cpu_lp_mask))
 		return CONFIG_REMOVE_INPUT_BOOST_FREQ_LP;
 
