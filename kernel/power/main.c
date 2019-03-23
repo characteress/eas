@@ -20,7 +20,6 @@
 
 DEFINE_MUTEX(pm_mutex);
 
-#ifdef CONFIG_PM_SLEEP
 
 /* Routines for PM-transition notifications */
 
@@ -53,7 +52,7 @@ int pm_notifier_call_chain(unsigned long val)
 }
 
 /* If set, devices may be suspended and resumed asynchronously. */
-int pm_async_enabled = 1;
+int pm_async_enabled = 0;
 
 static ssize_t pm_async_show(struct kobject *kobj, struct kobj_attribute *attr,
 			     char *buf)
@@ -240,7 +239,7 @@ static int __init pm_debugfs_init(void)
 late_initcall(pm_debugfs_init);
 #endif /* CONFIG_DEBUG_FS */
 
-#endif /* CONFIG_PM_SLEEP */
+
 
 #ifdef CONFIG_PM_SLEEP_DEBUG
 /*
@@ -330,14 +329,14 @@ static suspend_state_t decode_state(const char *buf, size_t n)
 	if (len == 4 && !strncmp(buf, "disk", len))
 		return PM_SUSPEND_MAX;
 
-#ifdef CONFIG_SUSPEND
+
 	for (state = PM_SUSPEND_MIN; state < PM_SUSPEND_MAX; state++) {
 		const char *label = pm_states[state];
 
 		if (label && len == strlen(label) && !strncmp(buf, label, len))
 			return state;
 	}
-#endif
+
 
 	return PM_SUSPEND_ON;
 }
@@ -372,7 +371,6 @@ static ssize_t state_store(struct kobject *kobj, struct kobj_attribute *attr,
 
 power_attr(state);
 
-#ifdef CONFIG_PM_SLEEP
 /*
  * The 'wakeup_count' attribute, along with the functions defined in
  * drivers/base/power/wakeup.c, provides a means by which wakeup events can be
@@ -442,7 +440,6 @@ static ssize_t wakeup_count_store(struct kobject *kobj,
 
 power_attr(wakeup_count);
 
-#ifdef CONFIG_PM_AUTOSLEEP
 static ssize_t autosleep_show(struct kobject *kobj,
 			      struct kobj_attribute *attr,
 			      char *buf)
@@ -452,11 +449,11 @@ static ssize_t autosleep_show(struct kobject *kobj,
 	if (state == PM_SUSPEND_ON)
 		return sprintf(buf, "off\n");
 
-#ifdef CONFIG_SUSPEND
+
 	if (state < PM_SUSPEND_MAX)
 		return sprintf(buf, "%s\n", pm_states[state] ?
 					pm_states[state] : "error");
-#endif
+
 #ifdef CONFIG_HIBERNATION
 	return sprintf(buf, "disk\n");
 #else
@@ -480,7 +477,6 @@ static ssize_t autosleep_store(struct kobject *kobj,
 }
 
 power_attr(autosleep);
-#endif /* CONFIG_PM_AUTOSLEEP */
 
 #ifdef CONFIG_PM_WAKELOCKS
 static ssize_t wake_lock_show(struct kobject *kobj,
@@ -518,7 +514,6 @@ static ssize_t wake_unlock_store(struct kobject *kobj,
 power_attr(wake_unlock);
 
 #endif /* CONFIG_PM_WAKELOCKS */
-#endif /* CONFIG_PM_SLEEP */
 
 #ifdef CONFIG_PM_TRACE
 int pm_trace_enabled;
@@ -566,7 +561,7 @@ power_attr(pm_trace_dev_match);
 
 #endif /* CONFIG_PM_TRACE */
 
-#ifdef CONFIG_FREEZER
+
 static ssize_t pm_freeze_timeout_show(struct kobject *kobj,
 				      struct kobj_attribute *attr, char *buf)
 {
@@ -588,7 +583,7 @@ static ssize_t pm_freeze_timeout_store(struct kobject *kobj,
 
 power_attr(pm_freeze_timeout);
 
-#endif	/* CONFIG_FREEZER*/
+
 
 static struct attribute * g[] = {
 	&state_attr.attr,
@@ -596,12 +591,9 @@ static struct attribute * g[] = {
 	&pm_trace_attr.attr,
 	&pm_trace_dev_match_attr.attr,
 #endif
-#ifdef CONFIG_PM_SLEEP
 	&pm_async_attr.attr,
 	&wakeup_count_attr.attr,
-#ifdef CONFIG_PM_AUTOSLEEP
 	&autosleep_attr.attr,
-#endif
 #ifdef CONFIG_PM_WAKELOCKS
 	&wake_lock_attr.attr,
 	&wake_unlock_attr.attr,
@@ -612,10 +604,10 @@ static struct attribute * g[] = {
 #ifdef CONFIG_PM_SLEEP_DEBUG
 	&pm_print_times_attr.attr,
 #endif
-#endif
-#ifdef CONFIG_FREEZER
+
+
 	&pm_freeze_timeout_attr.attr,
-#endif
+
 	NULL,
 };
 
