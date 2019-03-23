@@ -652,13 +652,8 @@ KBUILD_CFLAGS	+= $(call cc-disable-warning, int-in-bool-context)
 KBUILD_CFLAGS	+= $(call cc-option,-fno-PIE)
 KBUILD_AFLAGS	+= $(call cc-option,-fno-PIE)
 
-# not all drivers like store merging in newer GCCs
-# -pipe makes compilation faster
-# msm8996 is not affected so disable errata fixes
-KBUILD_CFLAGS   += -pipe -mno-fix-cortex-a53-843419 -mno-fix-cortex-a53-835769 -Wno-attribute-alias
-
-KBUILD_CFLAGS += -fgraphite -fgraphite-identity -floop-parallelize-all
-# -ftree-loop-distribute-patterns -ftree-loop-distribution -ftree-vectorize
+# Needed to unbreak GCC 7.x and above
+KBUILD_CFLAGS   += $(call cc-option,-fno-store-merging,)
 
 KBUILD_CFLAGS += -march=armv8-a+simd+crypto+crc -mtune=cortex-a57.cortex-a53 -fmerge-all-constants -fmodulo-sched -fmodulo-sched-allow-regmoves -floop-interchange
 # -finline-functions -> no significant performance jump, significantly increased size
