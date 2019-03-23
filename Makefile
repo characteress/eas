@@ -657,13 +657,7 @@ KBUILD_AFLAGS	+= $(call cc-option,-fno-PIE)
 KBUILD_CFLAGS   += $(call cc-option,-fno-store-merging,)
 
 # Kill format truncation warnings
-KBUILD_CFLAGS   += $(call cc-option,-O3,-Ofast) $(call cc-disable-warning,maybe-uninitialized,)
-
-ifeq ($(cc-name),clang)
-KBUILD_CFLAGS	+= -O3 -Ofast
-else
-KBUILD_CFLAGS	+= -O3 -Ofast
-endif
+KBUILD_CFLAGS   += $(call cc-disable-warning,maybe-uninitialized,)
 
 # Tell gcc to never replace conditional load with a non-conditional one
 KBUILD_CFLAGS	+= $(call cc-option,--param=allow-store-data-races=0)
