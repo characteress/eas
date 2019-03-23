@@ -3,9 +3,9 @@
 #
 
 ifdef CONFIG_CC_OPTIMIZE_PARTIAL
-EXTRA_CFLAGS += -O3 -Ofast
+EXTRA_CFLAGS += -O3
 endif
-EXTRA_CFLAGS += -O3 -Ofast
+EXTRA_CFLAGS += -O3
 
 obj-y     = fork.o exec_domain.o panic.o \
 	    cpu.o exit.o softirq.o resource.o \
