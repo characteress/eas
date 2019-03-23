@@ -1644,8 +1644,6 @@ endif
 # $(Q)$(MAKE) $(clean)=dir
 clean := -f $(srctree)/scripts/Makefile.clean obj
 
-endif	# skip-makefile
-
 PHONY += FORCE
 FORCE:
 
