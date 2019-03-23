@@ -402,7 +402,7 @@ KBUILD_CPPFLAGS := -D__KERNEL__
 KBUILD_CFLAGS   := -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-strict-aliasing -fno-common \
 		   -Wno-format-security \
-		   -mcpu=arm-kryo -mtune=arm-kryo \
+		   -mcpu=cortex-a53 -mtune=cortex-a53 \
 		   -std=gnu89
 
 KBUILD_AFLAGS_KERNEL :=
