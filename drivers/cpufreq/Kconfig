@@ -330,7 +330,7 @@ if CPU_INPUT_BOOST
 
 config INPUT_BOOST_DURATION_MS
 	int "Input boost duration"
-	default "1"
+	default "64"
 	help
 	  Input boost duration in milliseconds.
 
@@ -354,7 +354,7 @@ config INPUT_BOOST_FREQ_PERF
 
 config REMOVE_INPUT_BOOST_FREQ_LP
 	int "Low-power cluster return frequency"
-	default "0"
+	default "307200"
 	help
 	  This is the frequency the low-power cluster will fallback to
 	  once the boost is over. The default 0 will make the policy
@@ -364,7 +364,7 @@ config REMOVE_INPUT_BOOST_FREQ_LP
 
 config REMOVE_INPUT_BOOST_FREQ_PERF
 	int "Performance cluster return frequency"
-	default "0"
+	default "307200"
 	help
 	  This is the frequency the performance cluster will fallback to
 	  once the boost is over. The default 0 will make the policy
