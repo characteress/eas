@@ -655,10 +655,8 @@ KBUILD_AFLAGS	+= $(call cc-option,-fno-PIE)
 # Needed to unbreak GCC 7.x and above
 KBUILD_CFLAGS   += $(call cc-option,-fno-store-merging,)
 
-KBUILD_CFLAGS += -march=armv8-a+simd+crypto+crc -mtune=cortex-a57.cortex-a53 -fmerge-all-constants -fmodulo-sched -fmodulo-sched-allow-regmoves -floop-interchange
-# -finline-functions -> no significant performance jump, significantly increased size
-# -fpredictive-commoning -> slowing down intercore scores
-# -ffast-math -ftree-vectorize -ftree-slp-vectorize
+# Kill format truncation warnings
+KBUILD_CFLAGS   += $(call cc-disable-warning,format-truncation,)
 
 ifeq ($(cc-name),clang)
 KBUILD_CFLAGS	+= -O3
