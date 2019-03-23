@@ -93,6 +93,8 @@ int pm_autosleep_set_state(suspend_state_t state)
 	if (state >= PM_SUSPEND_MAX)
 		return -EINVAL;
 #endif
+	if (state >= PM_SUSPEND_MAX)
+		return -EINVAL;
 
 	__pm_stay_awake(autosleep_ws);
 
