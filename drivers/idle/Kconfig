@@ -3,6 +3,7 @@ config INTEL_IDLE
 	depends on CPU_IDLE
 	depends on X86
 	depends on CPU_SUP_INTEL
+	default y
 	help
 	  Enable intel_idle, a cpuidle driver that includes knowledge of
 	  native Intel hardware idle features.  The acpi_idle driver
@@ -11,6 +12,7 @@ config INTEL_IDLE
 
 menu "Memory power savings"
 depends on X86_64
+default y
 
 config I7300_IDLE_IOAT_CHANNEL
 	bool
@@ -18,6 +20,7 @@ config I7300_IDLE_IOAT_CHANNEL
 config I7300_IDLE
 	tristate "Intel chipset idle memory power saving driver"
 	select I7300_IDLE_IOAT_CHANNEL
+	default y
 	help
 	  Enable memory power savings when idle with certain Intel server
 	  chipsets. The chipset must have I/O AT support, such as the
