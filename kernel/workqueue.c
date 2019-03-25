@@ -274,6 +274,7 @@ module_param_named(disable_numa, wq_disable_numa, bool, 0444);
 
 /* see the comment above the definition of WQ_POWER_EFFICIENT */
 static bool wq_power_efficient = IS_ENABLED(CONFIG_WQ_POWER_EFFICIENT_DEFAULT);
+static bool wq_power_efficient = true;
 module_param_named(power_efficient, wq_power_efficient, bool, 0644);
 
 static bool wq_numa_enabled;		/* unbound NUMA affinity enabled */
@@ -4764,7 +4765,6 @@ long work_on_cpu(int cpu, long (*fn)(void *), void *arg)
 EXPORT_SYMBOL_GPL(work_on_cpu);
 #endif /* CONFIG_SMP */
 
-#ifdef CONFIG_FREEZER
 
 /**
  * freeze_workqueues_begin - begin freezing workqueues
@@ -4874,7 +4874,6 @@ void thaw_workqueues(void)
 out_unlock:
 	mutex_unlock(&wq_pool_mutex);
 }
-#endif /* CONFIG_FREEZER */
 
 static void __init wq_numa_init(void)
 {
