@@ -490,7 +490,6 @@ config QPNP_CHARGER
 	depends on SPMI || MSM_SPMI
  	depends on OF_SPMI
 	depends on THERMAL_QPNP_ADC_TM
-	default y
 	help
 	  Say Y here to enable the switch mode battery charger
 	  and boost device which supports USB detection and charging. The driver
@@ -501,7 +500,6 @@ config QPNP_SMBCHARGER
 	tristate "QPNP SMB Charger driver"
 	depends on SPMI || MSM_SPMI
 	depends on OF_SPMI
-	default y
 	help
 	  Say Y here to enable the dual path switch mode battery charger which
 	  supports USB detection and battery charging up to 3A.
@@ -512,7 +510,6 @@ config QPNP_SMB2
 	tristate "QPNP SMB Charger driver"
 	depends on SPMI || MSM_SPMI
 	depends on OF_SPMI
-	default y
 	help
 	  Enables support for the SMB2 charging peripheral.
 	  This charger module supports Type-C and uUSB interface with
@@ -604,7 +601,6 @@ config QPNP_LINEAR_CHARGER
 	depends on OF_SPMI
 	depends on MSM_QPNP_INT
 	depends on THERMAL_QPNP_ADC_TM
-	default y
 	help
 	  Say Y here to enable the Linear battery charger which supports USB
 	  detection and charging. The driver also offers relevant information
