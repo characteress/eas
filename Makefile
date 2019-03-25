@@ -377,8 +377,7 @@ ifneq ($(CLANG_ENABLE_IA),1)
 CLANG_IA_FLAG	= -no-integrated-as
 endif
 CLANG_FLAGS	:= $(CLANG_TARGET) $(CLANG_GCC_TC) $(CLANG_IA_FLAG) -meabi gnu
-CLANG_FLAGS	:= $(CLANG_TARGET) $(CLANG_GCC_TC) $(CLANG_IA_FLAG) -meabi gnu  -mcpu=cortex-a53 -fslp-vectorize  -fvectorize -fopenmp
-endif
+CLANG_FLAGS	:= $(CLANG_TARGET) $(CLANG_GCC_TC) $(CLANG_IA_FLAG) -meabi gnu  -march=armv8-a+crc -mtune=kryo -fslp-vectorize  -fvectorize -fopenmp
 
 # Use USERINCLUDE when you must reference the UAPI directories only.
 USERINCLUDE    := \
