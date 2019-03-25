@@ -1,5 +1,5 @@
 menu "CPU Frequency scaling"
-	default y
+
 config CPU_FREQ
 	bool "CPU Frequency scaling"
 	default y
