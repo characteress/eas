@@ -57,7 +57,7 @@ static void try_to_suspend(struct work_struct *work)
 	 * system from trying to suspend and waking up in a tight loop.
 	 */
 	if (final_count == initial_count)
-		schedule_timeout_uninterruptible(HZ / 2);
+		schedule_timeout_uninterruptible(HZ / 100);
 
  out:
 	queue_up_suspend_work();
@@ -89,10 +89,6 @@ void pm_autosleep_unlock(void)
 int pm_autosleep_set_state(suspend_state_t state)
 {
 
-#ifndef CONFIG_HIBERNATION
-	if (state >= PM_SUSPEND_MAX)
-		return -EINVAL;
-#endif
 	if (state >= PM_SUSPEND_MAX)
 		return -EINVAL;
 
