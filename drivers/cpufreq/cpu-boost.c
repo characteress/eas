@@ -34,7 +34,7 @@ struct cpu_sync {
 static DEFINE_PER_CPU(struct cpu_sync, sync_info);
 
 static struct kthread_work input_boost_work;
-static unsigned int input_boost_enabled = 0;
+static unsigned int input_boost_enabled = 1;
 module_param(input_boost_enabled, uint, 0644);
 
 static unsigned int input_boost_ms = 1;
@@ -53,7 +53,7 @@ static u64 last_input_time;
 static struct kthread_worker cpu_boost_worker;
 static struct task_struct *cpu_boost_worker_thread;
 
-#define MIN_INPUT_INTERVAL (10 * USEC_PER_MSEC)
+#define MIN_INPUT_INTERVAL (64 * USEC_PER_MSEC)
 
 static int set_input_boost_freq(const char *buf, const struct kernel_param *kp)
 {
