@@ -39,7 +39,9 @@ SCHED_FEAT(WAKEUP_PREEMPTION, true)
 /*
  * Use arch dependent cpu capacity functions
  */
+
 SCHED_FEAT(ARCH_CAPACITY, true)
+
 SCHED_FEAT(ARCH_POWER, true)
 
 SCHED_FEAT(HRTICK, false)
@@ -81,7 +83,8 @@ SCHED_FEAT(ATTACH_AGE_LOAD, true)
  * at runtime if running on a NUMA machine. Can be controlled via
  * numa_balancing=
  */
-SCHED_FEAT(NUMA,	true)
+#ifdef CONFIG_NUMA_BALANCING
+SCHED_FEAT(NUMA,	false)
 
 /*
  * NUMA_FAVOUR_HIGHER will favor moving tasks towards nodes where a
@@ -97,6 +100,7 @@ SCHED_FEAT(NUMA_FAVOUR_HIGHER, true)
  * due to CPU overload it is disabled by default.
  */
 SCHED_FEAT(NUMA_RESIST_LOWER, false)
+#endif
 
 /*
  * Energy aware scheduling. Use platform energy model to guide scheduling
