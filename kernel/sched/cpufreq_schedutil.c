@@ -26,7 +26,7 @@ unsigned long boosted_cpu_util(int cpu);
 #define cpufreq_driver_fast_switch(x, y) 0
 #define cpufreq_enable_fast_switch(x)
 #define cpufreq_disable_fast_switch(x)
-#define LATENCY_MULTIPLIER			(10)
+#define LATENCY_MULTIPLIER			(100)
 #define SUGOV_KTHREAD_PRIORITY	50
 
 struct sugov_tunables {
@@ -714,7 +714,7 @@ static int sugov_init(struct cpufreq_policy *policy)
 	} else {
 		unsigned int lat;
 		tunables->up_rate_limit_us = 200;
-		tunables->down_rate_limit_us = 20000;
+		tunables->down_rate_limit_us = 1000;
 		lat = policy->cpuinfo.transition_latency / NSEC_PER_USEC;
 		if (lat) {
                         tunables->up_rate_limit_us *= lat;
