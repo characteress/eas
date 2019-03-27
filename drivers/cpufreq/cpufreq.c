@@ -29,11 +29,18 @@
 #include <linux/suspend.h>
 #include <linux/syscore_ops.h>
 #include <linux/tick.h>
+#ifdef CONFIG_SMP
 #include <linux/sched.h>
+#endif
 #include <trace/events/power.h>
+#ifdef CONFIG_STATE_NOTIFIER
 #include <linux/state_notifier.h>
-#define SCREEN_OFF_CEILING 307200
-
+#ifdef CONFIG_MACH_MSM8996_LUCYE
+#define SCREEN_OFF_CEILING 902400
+#else
+#define SCREEN_OFF_CEILING 844800
+#endif
+#endif
 
 /**
  * The "cpufreq driver" - the arch- or hardware-dependent low
@@ -277,6 +284,7 @@ EXPORT_SYMBOL_GPL(cpufreq_cpu_put);
  * systems as each CPU might be scaled differently. So, use the arch
  * per-CPU loops_per_jiffy value wherever possible.
  */
+#ifndef CONFIG_SMP
 static unsigned long l_p_j_ref;
 static unsigned int l_p_j_ref_freq;
 
@@ -298,6 +306,12 @@ static void adjust_jiffies(unsigned long val, struct cpufreq_freqs *ci)
 			 loops_per_jiffy, ci->new);
 	}
 }
+#else
+static inline void adjust_jiffies(unsigned long val, struct cpufreq_freqs *ci)
+{
+	return;
+}
+#endif
 
 /*********************************************************************
  *               FREQUENCY INVARIANT CPU CAPACITY                    *
@@ -1317,7 +1331,7 @@ static int __cpufreq_add_dev(struct device *dev, struct subsys_interface *sif)
 
 	pr_debug("adding CPU %u\n", cpu);
 
-
+#ifdef CONFIG_SMP
 	/* check whether a different CPU already registered this
 	 * CPU because it is in the same boat. */
 	policy = cpufreq_cpu_get(cpu);
@@ -1325,7 +1339,7 @@ static int __cpufreq_add_dev(struct device *dev, struct subsys_interface *sif)
 		cpufreq_cpu_put(policy);
 		return 0;
 	}
-
+#endif
 
 	if (!down_read_trylock(&cpufreq_rwsem))
 		return 0;
@@ -2149,8 +2163,10 @@ int __cpufreq_driver_target(struct cpufreq_policy *policy,
 	if (cpufreq_disabled())
 		return -ENODEV;
 
+#ifdef CONFIG_STATE_NOTIFIER
 	if (state_suspended && target_freq > SCREEN_OFF_CEILING)
 		target_freq = SCREEN_OFF_CEILING;
+#endif
 
 	/* Make sure that target_freq is within supported range */
 	if (target_freq > policy->max)
