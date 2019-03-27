@@ -32,7 +32,6 @@ module_param(dynamic_stune_boost, short, 0644);
 module_param(input_boost_freq_lp, uint, 0644);
 module_param(input_boost_freq_hp, uint, 0644);
 module_param(input_boost_duration, short, 0644);
-#include "../../kernel/sched/sched.h"
 
 /* Available bits for boost_drv state */
 #define SCREEN_AWAKE		(1U << 0)
@@ -58,8 +57,6 @@ static struct boost_drv *boost_drv_g;
 
 static u32 get_boost_freq(struct boost_drv *b, u32 cpu)
 {
-	unsigned int i;
-
 	if (cpumask_test_cpu(cpu, cpu_lp_mask))
 		return input_boost_freq_lp;
 
@@ -71,11 +68,7 @@ static u32 get_min_freq(struct boost_drv *b, u32 cpu)
 	if (cpumask_test_cpu(cpu, cpu_lp_mask))
 		return CONFIG_REMOVE_INPUT_BOOST_FREQ_LP;
 
-	for_each_possible_cpu(i) {
-		if (i >= 2 && cpu_rq(i)->nr_running == 0)
-			return CONFIG_INPUT_BOOST_FREQ_PERF;
-	};
-	return 0;
+	return CONFIG_REMOVE_INPUT_BOOST_FREQ_PERF;
 }
 
 static u32 get_boost_state(struct boost_drv *b)
