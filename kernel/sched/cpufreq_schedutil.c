@@ -26,7 +26,7 @@ unsigned long boosted_cpu_util(int cpu);
 #define cpufreq_driver_fast_switch(x, y) 0
 #define cpufreq_enable_fast_switch(x)
 #define cpufreq_disable_fast_switch(x)
-#define LATENCY_MULTIPLIER			(1000)
+#define LATENCY_MULTIPLIER			(10)
 #define SUGOV_KTHREAD_PRIORITY	50
 
 struct sugov_tunables {
@@ -187,11 +187,7 @@ static unsigned int get_next_freq(struct sugov_policy *sg_policy,
 
 static inline bool use_pelt(void)
 {
-#ifdef CONFIG_SCHED_WALT
 	return (!sysctl_sched_use_walt_cpu_util || walt_disabled);
-#else
-	return true;
-#endif
 }
 
 static void sugov_get_util(unsigned long *util, unsigned long *max, u64 time)
@@ -717,7 +713,7 @@ static int sugov_init(struct cpufreq_policy *policy)
 		tunables->down_rate_limit_us = policy->down_transition_delay_us;
 	} else {
 		unsigned int lat;
-		tunables->up_rate_limit_us = 500;
+		tunables->up_rate_limit_us = 200;
 		tunables->down_rate_limit_us = 20000;
 		lat = policy->cpuinfo.transition_latency / NSEC_PER_USEC;
 		if (lat) {
