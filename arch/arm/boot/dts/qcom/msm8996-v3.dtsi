@@ -126,7 +126,7 @@
 
 			qcom,speed-bin = <0>;
 
-			qcom,initial-pwrlevel = <6>;
+			qcom,initial-pwrlevel = <7>;
 
 			qcom,gpu-pwrlevel@0 {
 				reg = <0>;
@@ -199,7 +199,7 @@
 
 			qcom,speed-bin = <1>;
 			
-			qcom,initial-pwrlevel = <5>;
+			qcom,initial-pwrlevel = <7>;
 
 			qcom,gpu-pwrlevel@0 {
 				reg = <0>;
@@ -272,7 +272,7 @@
 
 			qcom,speed-bin = <2>;
 
-			qcom,initial-pwrlevel = <5>;
+			qcom,initial-pwrlevel = <6>;
 
 			qcom,gpu-pwrlevel@0 {
 				reg = <0>;
@@ -338,7 +338,7 @@
 
 			qcom,speed-bin = <3>;
 
-			qcom,initial-pwrlevel = <5>;
+			qcom,initial-pwrlevel = <7>;
 
 			qcom,gpu-pwrlevel@0 {
 				reg = <0>;
@@ -804,8 +804,7 @@
 		< 1228800 >,
 		< 1324800 >,
 		< 1401600 >,
-		< 1478400 >,
-		< 1593600 >;
+		< 1478400 >;
 	qcom,cpufreq-table-2 =
 		<  307200 >,
 		<  403200 >,
@@ -827,11 +826,7 @@
 		< 1632000 >,
 		< 1708800 >,
 		< 1785600 >,
-		< 1824000 >,
-		< 1920000 >,
-		< 1996800 >,
-		< 2073600 >,
-		< 2150400 >;
+		< 1824000 >;
 };
 
 &m4m_cache {
@@ -904,10 +899,10 @@
 
 	mincpubw-cpufreq {
 		cpu-to-dev-map-0 =
-			< 1593600 1525 >;
+			< 1478400 1525 >;
 		cpu-to-dev-map-2 =
-			< 2073600 1525 >,
-			< 2150400 5195 >;
+			< 1785600 1525 >,
+			< 1824000 5195 >;
 	};
 };
 
@@ -930,7 +925,7 @@
 	};
 	qcom,msm-thermal {
 		msm_thermal_freq: qcom,vdd-apps-rstr{
-			qcom,max-freq-level = <1190400>;
+			qcom,max-freq-level = <1248000>;
 			qcom,levels = <1036800 1555200 1555200>;
 		};
 		qcom,vdd-gfx-rstr{
