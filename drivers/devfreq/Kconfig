@@ -48,7 +48,6 @@ config DEVFREQ_GOV_PERFORMANCE
 
 config DEVFREQ_GOV_POWERSAVE
 	tristate "Powersave"
-	default y
 	help
 	  Sets the frequency at the minimum available frequency.
 	  This governor always returns 0 as frequency so that
