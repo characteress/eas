@@ -251,7 +251,7 @@ static void cpu_idle_loop(void)
 			check_pgt_cache();
 			rmb();
 
-			if (cpu_is_offline(cpu)) {
+			if (cpu_is_offline(cpu))
 				arch_cpu_idle_dead();
 			}
 
