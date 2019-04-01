@@ -41,10 +41,10 @@
  */
 #define BCL_POLL_INTERVAL 1000
 /*
- * Mininum BCL poll interval 100 msec
+ * Mininum BCL poll interval 10 msec
  */
-#define MIN_BCL_POLL_INTERVAL 100
-#define BATTERY_VOLTAGE_MIN 3000
+#define MIN_BCL_POLL_INTERVAL 10
+#define BATTERY_VOLTAGE_MIN 3400
 #define BTM_8084_FREQ_MITIG_LIMIT 1958400
 #define MAX_CPU_NAME 10
 
@@ -59,7 +59,7 @@
  * Battery Current Limit Enable or Not
  */
 enum bcl_device_mode {
-	BCL_DEVICE_DISABLED = 1,
+	BCL_DEVICE_DISABLED = 0,
 	BCL_DEVICE_ENABLED,
 };
 
@@ -189,7 +189,7 @@ struct bcl_context {
 };
 
 enum bcl_threshold_state {
-	BCL_LOW_THRESHOLD = 1,
+	BCL_LOW_THRESHOLD = 0,
 	BCL_HIGH_THRESHOLD,
 	BCL_THRESHOLD_DISABLED,
 };
