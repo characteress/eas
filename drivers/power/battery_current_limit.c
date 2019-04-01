@@ -1503,8 +1503,6 @@ static int probe_bcl_periph_prop(struct bcl_context *bcl)
 		bcl->vbat_high_thresh.trip_value, ibat_probe_exit);
 	BCL_FETCH_DT_U32(ibat_node, key, "qcom,vph-low-threshold-uv", ret,
 		bcl->vbat_low_thresh.trip_value, ibat_probe_exit);
-		BCL_FETCH_DT_U32(ibat_node, key, "qcom,soc-low-threshold", ret,
-		soc_low_threshold, ibat_probe_exit);
 	bcl->vbat_high_thresh.trip_notify
 		= bcl->vbat_low_thresh.trip_notify = bcl_periph_vbat_notify;
 	bcl->vbat_high_thresh.trip_data
